@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import { Mail, Phone, Linkedin, Sun, Moon, MapPin, ExternalLink, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, Satellite, FileText, Target, Zap, Star, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +10,35 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+
+const AnimatedSection = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+const AnimatedCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      whileHover={{ scale: 1.02, y: -5 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -57,9 +87,40 @@ export default function Home() {
     }
   };
 
+  // Animation variants
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: "easeOut" }
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const staggerItem = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5, ease: "easeOut" }
+  };
+
+  const scaleOnHover = {
+    scale: 1.02,
+    transition: { duration: 0.2 }
+  };
+
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-white dark:bg-slate-950 font-sans">
+      <motion.div 
+        className="min-h-screen bg-white dark:bg-slate-950 font-sans"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         {/* Navigation */}
         <nav className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm border-slate-200 dark:border-slate-800">
           <div className="mx-auto max-w-7xl px-4 flex h-16 items-center justify-between">
@@ -169,15 +230,25 @@ export default function Home() {
           <div className="mx-auto max-w-4xl w-full text-center">
             <div className="space-y-8">
               {/* Avatar */}
-              <div className="inline-block">
+              <motion.div 
+                className="inline-block"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              >
                 <Avatar className="h-32 w-32 mx-auto ring-4 ring-slate-200 dark:ring-slate-700">
                   <AvatarImage src="/avatar.jpg" alt="Abhinav Maurya" />
                   <AvatarFallback className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-2xl font-bold">AM</AvatarFallback>
                 </Avatar>
-              </div>
+              </motion.div>
 
               {/* Name and Title */}
-              <div className="space-y-4">
+              <motion.div 
+                className="space-y-4"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              >
                 <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight">
                   Abhinav Maurya
                 </h1>
@@ -188,10 +259,15 @@ export default function Home() {
                   Passionate about building intelligent systems and scalable web applications.
                   Experienced in machine learning, full-stack development, and cloud technologies.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Contact Info */}
-              <div className="flex flex-wrap justify-center gap-4 text-sm">
+              <motion.div 
+                className="flex flex-wrap justify-center gap-4 text-sm"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+              >
                 <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2">
                   <MapPin className="h-4 w-4 text-slate-500" />
                   <span className="text-slate-700 dark:text-slate-300">Noida, Uttar Pradesh</span>
@@ -204,10 +280,15 @@ export default function Home() {
                   <Mail className="h-4 w-4 text-slate-500" />
                   <span className="text-slate-700 dark:text-slate-300">abhinavmaurya747@gmail.com</span>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+              >
                 <Button
                   size="lg"
                   className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm"
@@ -226,12 +307,17 @@ export default function Home() {
                   <Linkedin className="mr-2 h-5 w-5" />
                   Connect on LinkedIn
                 </Button>
-              </div>
+              </motion.div>
 
               {/* Scroll Indicator */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <motion.div 
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+              >
                 <ChevronDown className="h-6 w-6 text-slate-400 dark:text-slate-500 animate-bounce" />
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -259,41 +345,41 @@ export default function Home() {
               <div className="space-y-8">
                 {/* Tata Consultancy Services - ML Engineer */}
                 <Card className="relative md:ml-16 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
-                    <Zap className="h-4 w-4 text-white dark:text-slate-900" />
-                  </div>
-                  <CardHeader className="pb-4">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div>
-                        <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                          Machine Learning Engineer
-                        </CardTitle>
-                        <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
-                          Tata Consultancy Services
-                        </CardDescription>
-                      </div>
-                      <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
-                        Mar 2025 - Present
-                      </Badge>
+                    <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
+                      <Zap className="h-4 w-4 text-white dark:text-slate-900" />
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3 text-slate-700 dark:text-slate-300">
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Developing and deploying machine learning models for enterprise applications</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Working with large-scale data processing and AI-driven solutions</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Collaborating with cross-functional teams to implement ML solutions</span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
+                    <CardHeader className="pb-4">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                          <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
+                            Machine Learning Engineer
+                          </CardTitle>
+                          <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
+                            Tata Consultancy Services
+                          </CardDescription>
+                        </div>
+                        <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
+                          Mar 2025 - Present
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3 text-slate-700 dark:text-slate-300">
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>Developing and deploying machine learning models for enterprise applications</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>Working with large-scale data processing and AI-driven solutions</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>Collaborating with cross-functional teams to implement ML solutions</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
 
                 {/* Tata Consultancy Services - Full Stack Developer */}
                 <Card className="relative md:ml-16 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
@@ -714,7 +800,7 @@ export default function Home() {
             </div>
           </div>
         </footer>
-      </div>
+      </motion.div>
     </TooltipProvider>
   );
 }

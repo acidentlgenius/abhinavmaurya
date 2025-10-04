@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, Sun, Moon, MapPin, ExternalLink, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, Satellite, FileText, Target, Zap, Star, ChevronDown, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,35 +10,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from '@/components/ui/navigation-menu';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-
-const AnimatedSection = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-const AnimatedCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ scale: 1.02, y: -5 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -90,32 +61,6 @@ export default function Home() {
     }
   };
 
-  // Animation variants
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: "easeOut" }
-  };
-
-  const staggerContainer = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const staggerItem = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: "easeOut" }
-  };
-
-  const scaleOnHover = {
-    scale: 1.02,
-    transition: { duration: 0.2 }
-  };
-
   return (
     <TooltipProvider>
       <motion.div 
@@ -147,16 +92,22 @@ export default function Home() {
                   { id: 'achievements', label: 'Achievements' }
                 ].map((item) => (
                   <NavigationMenuItem key={item.id}>
-                    <NavigationMenuLink
-                      className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                        activeSection === item.id
-                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
-                          : 'hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300'
-                      }`}
-                      onClick={() => scrollToSection(item.id)}
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
                     >
-                      {item.label}
-                    </NavigationMenuLink>
+                      <NavigationMenuLink
+                        className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
+                          activeSection === item.id
+                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                            : 'hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300'
+                        }`}
+                        onClick={() => scrollToSection(item.id)}
+                      >
+                        {item.label}
+                      </NavigationMenuLink>
+                    </motion.div>
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -165,14 +116,20 @@ export default function Home() {
             <div className="flex items-center space-x-2">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={toggleTheme}
-                    className="h-9 w-9 hover:bg-slate-50 dark:hover:bg-slate-900"
+                  <motion.div
+                    whileHover={{ scale: 1.1, rotate: 15 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                  </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={toggleTheme}
+                      className="h-9 w-9 hover:bg-slate-50 dark:hover:bg-slate-900"
+                    >
+                      {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                    </Button>
+                  </motion.div>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Toggle theme</p>
@@ -271,18 +228,36 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
               >
-                <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2">
-                  <MapPin className="h-4 w-4 text-slate-500" />
-                  <span className="text-slate-700 dark:text-slate-300">Noida, Uttar Pradesh</span>
-                </div>
-                <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2">
-                  <Phone className="h-4 w-4 text-slate-500" />
-                  <span className="text-slate-700 dark:text-slate-300">+91 8299142953</span>
-                </div>
-                <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2">
-                  <Mail className="h-4 w-4 text-slate-500" />
-                  <span className="text-slate-700 dark:text-slate-300">abhinavmaurya747@gmail.com</span>
-                </div>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                  className="cursor-pointer"
+                >
+                  <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <MapPin className="h-4 w-4 text-slate-500" />
+                    <span className="text-slate-700 dark:text-slate-300">Noida, Uttar Pradesh</span>
+                  </div>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                  className="cursor-pointer"
+                >
+                  <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <Phone className="h-4 w-4 text-slate-500" />
+                    <span className="text-slate-700 dark:text-slate-300">+91 8299142953</span>
+                  </div>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  transition={{ duration: 0.2 }}
+                  className="cursor-pointer"
+                >
+                  <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+                    <Mail className="h-4 w-4 text-slate-500" />
+                    <span className="text-slate-700 dark:text-slate-300">abhinavmaurya747@gmail.com</span>
+                  </div>
+                </motion.div>
               </motion.div>
 
               {/* Action Buttons */}
@@ -292,24 +267,36 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
               >
-                <Button
-                  size="lg"
-                  className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm"
-                  onClick={() => scrollToSection('experience')}
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <Briefcase className="mr-2 h-5 w-5" />
-                  View My Work
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
-                  onClick={() => window.open('https://linkedin.com/in/acidentlgenius', '_blank')}
+                  <Button
+                    size="lg"
+                    className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm"
+                    onClick={() => scrollToSection('experience')}
+                  >
+                    <Briefcase className="mr-2 h-5 w-5" />
+                    View My Work
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <Linkedin className="mr-2 h-5 w-5" />
-                  Connect on LinkedIn
-                </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    onClick={() => window.open('https://linkedin.com/in/acidentlgenius', '_blank')}
+                  >
+                    <Linkedin className="mr-2 h-5 w-5" />
+                    Connect on LinkedIn
+                  </Button>
+                </motion.div>
               </motion.div>
 
               {/* Scroll Indicator */}
@@ -347,7 +334,15 @@ export default function Home() {
 
               <div className="space-y-8">
                 {/* Tata Consultancy Services - ML Engineer */}
-                <Card className="relative md:ml-16 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="relative md:ml-16"
+                >
+                  <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300">
                     <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
                       <Zap className="h-4 w-4 text-white dark:text-slate-900" />
                     </div>
@@ -391,9 +386,18 @@ export default function Home() {
                       </ul>
                     </CardContent>
                   </Card>
+                </motion.div>
 
                 {/* Tata Consultancy Services - Full Stack Developer */}
-                <Card className="relative md:ml-16 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="relative md:ml-16"
+                >
+                  <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300">
                   <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
                     <Code className="h-4 w-4 text-white dark:text-slate-900" />
                   </div>
@@ -433,9 +437,18 @@ export default function Home() {
                     </ul>
                   </CardContent>
                 </Card>
+                </motion.div>
 
                 {/* ResoluteAI - ML Intern */}
-                <Card className="relative md:ml-16 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="relative md:ml-16"
+                >
+                  <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300">
                   <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
                     <Target className="h-4 w-4 text-white dark:text-slate-900" />
                   </div>
@@ -467,6 +480,7 @@ export default function Home() {
                     </ul>
                   </CardContent>
                 </Card>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -490,7 +504,14 @@ export default function Home() {
 
             <div className="grid gap-8 md:grid-cols-2">
               {/* Code Smart Chrome Extension */}
-              <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="p-3 bg-slate-900 dark:bg-slate-100 rounded-lg">
@@ -511,7 +532,9 @@ export default function Home() {
                     Developed an interactive Chrome extension for on-demand coding education (50+ active users) by integrating OpenAI&apos;s GPT and Google&apos;s Gemini APIs, reducing external search dependency by 90%. Led a team of 5 developers, optimizing PostgreSQL queries (+25% performance), designing scalable RESTful APIs, and building CI/CD pipelines. Implemented robust XPath solutions for dynamic web data extraction.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Python</Badge>
+                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+                      <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 cursor-pointer">Python</Badge>
+                    </motion.div>
                     <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Flask</Badge>
                     <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">OpenAI</Badge>
                     <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Gemini</Badge>
@@ -537,9 +560,17 @@ export default function Home() {
                   </Button>
                 </CardContent>
               </Card>
+              </motion.div>
 
               {/* Satellite Imagery Prediction */}
-              <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-4">
                     <div className="p-3 bg-slate-900 dark:bg-slate-100 rounded-lg">
@@ -572,6 +603,7 @@ export default function Home() {
                   </Button>
                 </CardContent>
               </Card>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -807,18 +839,30 @@ export default function Home() {
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://github.com" className="flex items-center gap-2">
-                  <Github className="h-4 w-4" />
-                  GitHub
-                </a>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <a href="https://linkedin.com/in/acidentlgenius" className="flex items-center gap-2">
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                </a>
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="https://github.com" className="flex items-center gap-2">
+                    <Github className="h-4 w-4" />
+                    GitHub
+                  </a>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button variant="ghost" size="sm" asChild>
+                  <a href="https://linkedin.com/in/acidentlgenius" className="flex items-center gap-2">
+                    <Linkedin className="h-4 w-4" />
+                    LinkedIn
+                  </a>
+                </Button>
+              </motion.div>
             </div>
           </div>
         </footer>

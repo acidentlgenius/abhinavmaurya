@@ -46,9 +46,12 @@ export default function Home() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (savedTheme !== 'light') {
       setDarkMode(true);
       document.documentElement.classList.add('dark');
+    } else {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
     }
 
     // Intersection Observer for active section tracking
@@ -367,15 +370,23 @@ export default function Home() {
                       <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Developing and deploying machine learning models for enterprise applications</span>
+                          <span>Implemented real-time streaming with a robust heartbeat mechanism to ensure seamless, uninterrupted performance for extended LLM interactions, enhancing user experience and system reliability.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Working with large-scale data processing and AI-driven solutions</span>
+                          <span>Architected and deployed a vehicle recommendation engine by integrating research-phase algorithms into production databases, seamlessly embedding it into the core LLM chat application to deliver personalized, data-driven suggestions.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Collaborating with cross-functional teams to implement ML solutions</span>
+                          <span>Developed a file upload feature for chat interactions, leveraging vector database chunking and ranking-based context generation to provide precise, context-aware responses to user queries, boosting engagement and utility.</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>Engineered an advanced agentic flow that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.</span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>Enhanced chatbot capabilities by implementing prompt-driven data visualization. Automatically analyzed user prompts to identify visualization needs, generated SQL queries to fetch relevant data from Redshift, and streamed graph data to the frontend for real-time rendering, enriching user insights.</span>
                         </li>
                       </ul>
                     </CardContent>
@@ -405,19 +416,19 @@ export default function Home() {
                     <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Built and maintained full-stack web applications using modern technologies</span>
+                        <span>Contributed to Baadal&apos;s cloud infrastructure by developing key modules (Ceph, OpenStack, Nagios, DB Compute, DNS Provisioning) that boosted scalability by 30% and supported 10,000+ virtual instances; collaborated with stakeholders to align solutions with organizational needs.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Implemented responsive user interfaces with React and backend APIs with Node.js/Flask</span>
+                        <span>Enhanced these modules by designing robust RESTful APIs, intuitive UIs, and integrating multithreading techniques to improve user experience and system performance under high-load conditions.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Integrated machine learning models into web applications for enhanced functionality</span>
+                        <span>Engineered cloud orchestration features, REST APIs, and CLI commands using Python, Docker, Kubernetes, OSM, MongoDB, and SQL, automating virtual machine management, boosting system reliability by 25% and reducing manual intervention time by 40% across a unified portal.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Collaborated in agile development teams and participated in code reviews</span>
+                        <span>Led and designed the implementation of a tool to automate the 4g/5g node deployment process for BSNL, reducing deployment time from 2 hours to just 20 minutes using Python, Flask, Frontend and Backend technologies. Tooling improved the speed and accuracy of deployment, saving the company time and resources.</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -447,15 +458,11 @@ export default function Home() {
                     <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Gained hands-on experience in machine learning model development and deployment</span>
+                        <span>Build a dashboard for visualization of a data analytic project which boosted the process by 60%. Also, trained model using gradient boosting and added a module for prediction with an R2 score of 99.8%.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Worked on data preprocessing, feature engineering, and model evaluation</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Contributed to research projects and learned industry best practices</span>
+                        <span>Created a machine learning pipeline that can create a 3D model from a given 2D photograph of a person using open-source tools and demonstrated it.</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -501,14 +508,28 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed">
-                    A powerful Chrome extension designed to enhance coding productivity and learning.
-                    Features intelligent code suggestions, debugging assistance, and seamless integration
-                    with popular coding platforms.
+                    Developed an interactive Chrome extension for on-demand coding education (50+ active users) by integrating OpenAI&apos;s GPT and Google&apos;s Gemini APIs, reducing external search dependency by 90%. Led a team of 5 developers, optimizing PostgreSQL queries (+25% performance), designing scalable RESTful APIs, and building CI/CD pipelines. Implemented robust XPath solutions for dynamic web data extraction.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Chrome Extension</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Python</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Flask</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">OpenAI</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Gemini</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">DynamoDB</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">PostgreSQL</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">ReactJs</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Typescript</Badge>
                     <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">JavaScript</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Productivity</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Webpack</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Tailwind</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">NodeJS</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">AJAX</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">AWS</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Azure</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">BitBucket</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Jira</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Confluence</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Linux</Badge>
                   </div>
                   <Button className="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200">
                     <ExternalLink className="mr-2 h-4 w-4" />
@@ -536,14 +557,14 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed">
-                    An advanced machine learning project focused on analyzing satellite imagery for predictive analytics.
-                    Utilizes computer vision and deep learning techniques to extract meaningful insights
-                    from geospatial data.
+                    Implemented an AI system to identify 2 particular structures from Large Satellite Images and in real-time. Analysed and explored many aspects of computer vision techniques and applied on collected dataset. Accelerated the prediction time for live identifications on google maps satellite image to 20 fps on GPU.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Machine Learning</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Computer Vision</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Geospatial</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Python</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Numpy</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Tensorflow</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Neural Networks</Badge>
+                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Object Detection</Badge>
                   </div>
                   <Button className="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200">
                     <ExternalLink className="mr-2 h-4 w-4" />
@@ -671,6 +692,7 @@ export default function Home() {
                   <div className="text-slate-700 dark:text-slate-300">
                     <p className="text-lg font-medium">Rajkiya Engineering College, Sonbhadra</p>
                     <p className="text-base text-slate-500 dark:text-slate-400">August 2018 - June 2022</p>
+                    <p className="text-base text-slate-500 dark:text-slate-400">Uttar Pradesh, India</p>
                   </div>
                   <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full">
                     <Star className="h-4 w-4" />
@@ -722,7 +744,7 @@ export default function Home() {
                     Emotion Classification Hackathon
                   </p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">
-                    Hacker Earth
+                    Hacker Earth organized by Cogito
                   </p>
                 </CardContent>
               </Card>
@@ -742,10 +764,10 @@ export default function Home() {
                     Published Research Paper
                   </div>
                   <p className="text-slate-700 dark:text-slate-300 font-medium mb-2">
-                    AJSE Journal
+                    &ldquo;A regularization factor-based approach to anomaly detection using Contrastive Learning&rdquo;
                   </p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">
-                    Springer Publication
+                    AJSE Journal, Springer (Impact Factor: 2.807)
                   </p>
                 </CardContent>
               </Card>
@@ -768,7 +790,7 @@ export default function Home() {
                     Problems Solved
                   </p>
                   <p className="text-sm text-slate-500 dark:text-slate-400">
-                    Coding Platforms
+                    gfg, hackerrank, leetcode, etc.
                   </p>
                 </CardContent>
               </Card>

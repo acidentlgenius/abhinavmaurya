@@ -62,7 +62,7 @@ export default function Home() {
       <div className="min-h-screen bg-white dark:bg-slate-950 font-sans">
         {/* Navigation */}
         <nav className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-slate-950/95 backdrop-blur-sm border-slate-200 dark:border-slate-800">
-          <div className="container flex h-16 items-center justify-between px-4">
+          <div className="mx-auto max-w-7xl px-4 flex h-16 items-center justify-between">
             <div className="flex items-center space-x-2">
               <Avatar className="h-8 w-8 ring-2 ring-slate-200 dark:ring-slate-700">
                 <AvatarImage src="/avatar.jpg" alt="Abhinav Maurya" />
@@ -165,8 +165,8 @@ export default function Home() {
 
         {/* Hero Section */}
                 {/* Hero Section */}
-        <section id="hero" className="min-h-screen flex items-center justify-center px-4 py-20">
-          <div className="container max-w-4xl mx-auto text-center">
+        <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
+          <div className="mx-auto max-w-4xl w-full text-center">
             <div className="space-y-8">
               {/* Avatar */}
               <div className="inline-block">
@@ -236,10 +236,9 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="container px-4 pb-24 space-y-24">
         {/* Experience Section */}
-        <section id="experience" className="py-20 px-4 bg-slate-50 dark:bg-slate-900/50">
-          <div className="container max-w-6xl mx-auto">
+        <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
+          <div className="mx-auto max-w-6xl w-full">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Briefcase className="h-4 w-4" />
@@ -381,8 +380,8 @@ export default function Home() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 px-4">
-          <div className="container max-w-6xl mx-auto">
+        <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl w-full">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Code className="h-4 w-4" />
@@ -471,8 +470,8 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20 px-4 bg-slate-50 dark:bg-slate-900/50">
-          <div className="container max-w-6xl mx-auto">
+        <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
+          <div className="mx-auto max-w-6xl w-full">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Star className="h-4 w-4" />
@@ -554,8 +553,8 @@ export default function Home() {
         </section>
 
         {/* Education Section */}
-        <section id="education" className="py-20 px-4">
-          <div className="container max-w-4xl mx-auto">
+        <section id="education" className="py-20 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl w-full">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <GraduationCap className="h-4 w-4" />
@@ -603,8 +602,8 @@ export default function Home() {
         </section>
 
         {/* Achievements Section */}
-        <section id="achievements" className="py-20 px-4 bg-white dark:bg-slate-950">
-          <div className="container max-w-6xl mx-auto">
+        <section id="achievements" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950">
+          <div className="mx-auto max-w-6xl w-full">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Trophy className="h-4 w-4" />
@@ -690,11 +689,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        </div>
 
         {/* Footer */}
         <footer className="border-t bg-muted/50">
-          <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+          <div className="mx-auto max-w-7xl flex flex-col items-center justify-between gap-4 py-10 px-4 md:h-24 md:flex-row md:py-0">
             <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
               <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                 Built with ❤️ using Next.js and shadcn/ui

@@ -17,6 +17,71 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
   const [currentProject, setCurrentProject] = useState(0);
 
+  // Rising Sun Animation Component
+  const RisingSun = () => {
+    return (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Sun */}
+        <motion.div
+          className="absolute w-64 h-64 rounded-full"
+          style={{
+            background: 'radial-gradient(circle, #fbbf24 0%, #f59e0b 30%, #d97706 60%, #ea580c 100%)',
+            filter: 'blur(1px)',
+            right: '5%',
+            transform: 'translateX(50%)',
+            boxShadow: '0 0 80px rgba(251, 191, 36, 0.8), 0 0 150px rgba(245, 158, 11, 0.6), 0 0 220px rgba(217, 119, 6, 0.4)'
+          }}
+          initial={{ y: '100vh', scale: 0.5, opacity: 0.7 }}
+          animate={{ y: '-20vh', scale: 1, opacity: 1 }}
+          transition={{
+            duration: 4,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.5
+          }}
+        />
+        
+        {/* Glowing Particles */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute w-2 h-2 bg-yellow-300 rounded-full opacity-70"
+            style={{
+              right: `${10 + Math.random() * 30}%`,
+              top: `${40 + Math.random() * 30}%`,
+            }}
+            initial={{ scale: 0, y: 50, opacity: 0 }}
+            animate={{ 
+              scale: [0, 1, 0],
+              y: [-50, -100, -150],
+              opacity: [0, 0.8, 0],
+              x: [0, Math.random() * 100 - 50, Math.random() * 200 - 100]
+            }}
+            transition={{
+              duration: 6 + Math.random() * 4,
+              delay: Math.random() * 5,
+              ease: 'easeOut',
+              repeat: Infinity,
+              repeatDelay: Math.random() * 3
+            }}
+          />
+        ))}
+        
+        {/* Gradient Background */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: darkMode 
+              ? 'radial-gradient(ellipse at right bottom, rgba(251, 191, 36, 0.1) 0%, rgba(15, 23, 42, 0.8) 70%)'
+              : 'radial-gradient(ellipse at right bottom, rgba(251, 191, 36, 0.15) 0%, rgba(248, 250, 252, 0.9) 70%)'
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 3, ease: 'easeInOut' }}
+        />
+      </div>
+    );
+  };
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme !== 'light') {
@@ -293,9 +358,11 @@ export default function Home() {
         </nav>
 
         {/* Hero Section */}
-                {/* Hero Section */}
-        <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20">
-          <div className="mx-auto max-w-4xl w-full text-center">
+        <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
+          {/* Rising Sun Background Animation */}
+          <RisingSun />
+          
+          <div className="relative mx-auto max-w-4xl w-full text-center z-10">
             <div className="space-y-8">
               {/* Avatar */}
               <motion.div 
@@ -304,15 +371,33 @@ export default function Home() {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               >
-                <div className="relative h-48 w-48 mx-auto ring-4 ring-slate-200 dark:ring-slate-700 rounded-full overflow-hidden">
+                <motion.div 
+                  className="relative h-48 w-48 mx-auto rounded-full overflow-hidden"
+                  animate={{
+                    boxShadow: [
+                      '0 0 20px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.3)',
+                      '0 0 40px rgba(251, 191, 36, 0.8), 0 0 100px rgba(251, 191, 36, 0.5)',
+                      '0 0 20px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.3)'
+                    ]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut'
+                  }}
+                  style={{
+                    border: '4px solid',
+                    borderImage: 'linear-gradient(45deg, #fbbf24, #f59e0b, #d97706) 1'
+                  }}
+                >
                   <Image
                     src="/portfolio_image.jpeg"
                     alt="Abhinav Maurya"
                     fill
-                    objectFit="cover"
+                    style={{ objectFit: 'cover' }}
                     className="rounded-full"
                   />
-                </div>
+                </motion.div>
               </motion.div>
 
               {/* Name and Title */}
@@ -325,9 +410,19 @@ export default function Home() {
                 <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight">
                   Abhinav Maurya
                 </h1>
-                <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium">
-                  Machine Learning Engineer & Full Stack Developer
-                </p>
+                <motion.p 
+                  className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium"
+                  animate={{
+                    color: ['#64748b', '#f59e0b', '#64748b']
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: 'easeInOut'
+                  }}
+                >
+                  🚀 Machine Learning Engineer & Full Stack Developer
+                </motion.p>
                 <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
                   Passionate about building intelligent systems and scalable web applications.
                   Experienced in machine learning, full-stack development, and cloud technologies.

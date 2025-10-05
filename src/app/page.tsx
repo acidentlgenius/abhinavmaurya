@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Linkedin, Sun, Moon, MapPin, ExternalLink, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, Satellite, FileText, Target, Zap, Star, ChevronDown, ArrowRight } from 'lucide-react';
+import { Mail, Phone, Linkedin, Sun, Moon, MapPin, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, Satellite, FileText, Target, Zap, Star, ChevronDown, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,6 +14,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [currentProject, setCurrentProject] = useState(0);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -59,6 +60,61 @@ export default function Home() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const projects = [
+    {
+      id: 'code-smart',
+      icon: Chrome,
+      title: 'Code Smart Chrome Extension',
+      period: 'Jan 2024 - Dec 2025',
+      chromeStoreUrl: 'https://chromewebstore.google.com/detail/code-smart-ai-powered-lear/abcdef123456',
+      demoUrl: 'https://codesmart-demo.vercel.app',
+      websiteUrl: 'https://www.codesmart.in',
+      description: 'An online platform offering tailored hints, examples, and solutions for LeetCode questions via a Chrome extension, utilizing GPT-4 and Google Gemini.',
+      keyFeatures: [
+        'Led a 5-person team and designed the system from scratch.',
+        'Integrated Razorpay for payment handling.',
+        'Implemented cron jobs for daily credit updates.',
+        'Structured codebase using PostgreSQL (services, controllers, DAOs).',
+        'Utilized GPT-4 and Google\'s Gemini API for Chrome extension features.',
+        'Built frontend with React, TypeScript, TailwindCSS for a responsive UI.',
+        'Implemented Firebase authentication.'
+      ],
+      techStack: ['React', 'TypeScript', 'TailwindCSS', 'PostgreSQL', 'GPT-4', 'Gemini API', 'Firebase Auth', 'Chrome Extension'],
+      stats: 'Team of 5 • 100+ user logins, 50+ Chrome extension users',
+      iframeScale: 1
+    },
+    {
+      id: 'satellite-imagery',
+      icon: Satellite,
+      title: 'Satellite Imagery Prediction',
+      period: 'July 2020 - Dec 2020',
+      githubUrl: 'https://github.com/abhinavmaurya/satellite-imagery-ai',
+      demoUrl: 'https://satellite-imagery-demo.vercel.app',
+      websiteUrl: 'https://satellite-imagery-demo.vercel.app',
+      description: 'An AI-powered system for real-time identification of specific structures from large satellite images, utilizing advanced computer vision techniques.',
+      keyFeatures: [
+        'Implemented AI system to identify 2 particular structures from Large Satellite Images in real-time.',
+        'Analysed and explored various aspects of computer vision techniques and applied them on collected dataset.',
+        'Accelerated prediction time for live identifications on Google Maps satellite images to 20 fps on GPU.'
+      ],
+      techStack: ['Python', 'Numpy', 'Tensorflow', 'Neural Networks', 'Object Detection'],
+      stats: 'Real-time processing • 20 fps on GPU • Advanced computer vision',
+      iframeScale: 0.6
+    }
+  ];
+
+  const nextProject = () => {
+    setCurrentProject((prev) => (prev + 1) % projects.length);
+  };
+
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const goToProject = (index: number) => {
+    setCurrentProject(index);
   };
 
   return (
@@ -365,23 +421,23 @@ export default function Home() {
                       <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Implemented real-time streaming with a robust heartbeat mechanism to ensure seamless, uninterrupted performance for extended LLM interactions, enhancing user experience and system reliability.</span>
+                          <span>Implemented <strong className="text-blue-600 dark:text-blue-400">real-time streaming</strong> with a robust <strong className="text-blue-600 dark:text-blue-400">heartbeat mechanism</strong> to ensure seamless, uninterrupted performance for extended <strong className="text-blue-600 dark:text-blue-400">LLM</strong> interactions, enhancing user experience and system reliability.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Architected and deployed a vehicle recommendation engine by integrating research-phase algorithms into production databases, seamlessly embedding it into the core LLM chat application to deliver personalized, data-driven suggestions.</span>
+                          <span>Architected and deployed a vehicle recommendation engine by integrating research-phase algorithms into production databases, seamlessly embedding it into the core <strong className="text-blue-600 dark:text-blue-400">LLM</strong> chat application to deliver personalized, data-driven suggestions.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Developed a file upload feature for chat interactions, leveraging vector database chunking and ranking-based context generation to provide precise, context-aware responses to user queries, boosting engagement and utility.</span>
+                          <span>Developed a file upload feature for chat interactions, leveraging <strong className="text-blue-600 dark:text-blue-400">vector database</strong> chunking and ranking-based context generation to provide precise, context-aware responses to user queries, boosting engagement and utility.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Engineered an advanced agentic flow that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.</span>
+                          <span>Engineered an advanced <strong className="text-blue-600 dark:text-blue-400">agentic flow</strong> that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Enhanced chatbot capabilities by implementing prompt-driven data visualization. Automatically analyzed user prompts to identify visualization needs, generated SQL queries to fetch relevant data from Redshift, and streamed graph data to the frontend for real-time rendering, enriching user insights.</span>
+                          <span>Enhanced chatbot capabilities by implementing prompt-driven data visualization. Automatically analyzed user prompts to identify visualization needs, generated <strong className="text-blue-600 dark:text-blue-400">SQL</strong> queries to fetch relevant data from <strong className="text-blue-600 dark:text-blue-400">Redshift</strong>, and streamed graph data to the frontend for <strong className="text-blue-600 dark:text-blue-400">real-time rendering</strong>, enriching user insights.</span>
                         </li>
                       </ul>
                     </CardContent>
@@ -420,19 +476,19 @@ export default function Home() {
                     <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Contributed to Baadal&apos;s cloud infrastructure by developing key modules (Ceph, OpenStack, Nagios, DB Compute, DNS Provisioning) that boosted scalability by 30% and supported 10,000+ virtual instances; collaborated with stakeholders to align solutions with organizational needs.</span>
+                        <span>Contributed to <strong className="text-purple-600 dark:text-purple-400">Baadal</strong>&apos;s cloud infrastructure by developing key modules (<strong className="text-blue-600 dark:text-blue-400">Ceph</strong>, <strong className="text-blue-600 dark:text-blue-400">OpenStack</strong>, <strong className="text-blue-600 dark:text-blue-400">Nagios</strong>, <strong className="text-blue-600 dark:text-blue-400">DB Compute</strong>, <strong className="text-blue-600 dark:text-blue-400">DNS Provisioning</strong>) that boosted scalability by <strong className="text-green-600 dark:text-green-400">30%</strong> and supported <strong className="text-green-600 dark:text-green-400">10,000+ virtual instances</strong>; collaborated with stakeholders to align solutions with organizational needs.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Enhanced these modules by designing robust RESTful APIs, intuitive UIs, and integrating multithreading techniques to improve user experience and system performance under high-load conditions.</span>
+                        <span>Enhanced these modules by designing robust <strong className="text-blue-600 dark:text-blue-400">RESTful APIs</strong>, intuitive UIs, and integrating <strong className="text-blue-600 dark:text-blue-400">multithreading</strong> techniques to improve user experience and system performance under high-load conditions.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Engineered cloud orchestration features, REST APIs, and CLI commands using Python, Docker, Kubernetes, OSM, MongoDB, and SQL, automating virtual machine management, boosting system reliability by 25% and reducing manual intervention time by 40% across a unified portal.</span>
+                        <span>Engineered <strong className="text-blue-600 dark:text-blue-400">cloud orchestration</strong> features, <strong className="text-blue-600 dark:text-blue-400">REST APIs</strong>, and <strong className="text-blue-600 dark:text-blue-400">CLI</strong> commands using <strong className="text-blue-600 dark:text-blue-400">Python</strong>, <strong className="text-blue-600 dark:text-blue-400">Docker</strong>, <strong className="text-blue-600 dark:text-blue-400">Kubernetes</strong>, <strong className="text-blue-600 dark:text-blue-400">OSM</strong>, <strong className="text-blue-600 dark:text-blue-400">MongoDB</strong>, and <strong className="text-blue-600 dark:text-blue-400">SQL</strong>, automating virtual machine management, boosting system reliability by <strong className="text-green-600 dark:text-green-400">25%</strong> and reducing manual intervention time by <strong className="text-green-600 dark:text-green-400">40%</strong> across a unified portal.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Led and designed the implementation of a tool to automate the 4g/5g node deployment process for BSNL, reducing deployment time from 2 hours to just 20 minutes using Python, Flask, Frontend and Backend technologies. Tooling improved the speed and accuracy of deployment, saving the company time and resources.</span>
+                        <span>Led and designed the implementation of a tool to automate the <strong className="text-blue-600 dark:text-blue-400">4g/5g node deployment</strong> process for <strong className="text-purple-600 dark:text-purple-400">BSNL</strong>, reducing deployment time from <strong className="text-green-600 dark:text-green-400">2 hours to just 20 minutes</strong> using <strong className="text-blue-600 dark:text-blue-400">Python</strong>, <strong className="text-blue-600 dark:text-blue-400">Flask</strong>, Frontend and Backend technologies. Tooling improved the speed and accuracy of deployment, saving the company time and resources.</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -471,11 +527,11 @@ export default function Home() {
                     <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Build a dashboard for visualization of a data analytic project which boosted the process by 60%. Also, trained model using gradient boosting and added a module for prediction with an R2 score of 99.8%.</span>
+                        <span>Build a dashboard for visualization of a data analytic project which boosted the process by <strong className="text-green-600 dark:text-green-400">60%</strong>. Also, trained model using <strong className="text-blue-600 dark:text-blue-400">gradient boosting</strong> and added a module for prediction with an <strong className="text-green-600 dark:text-green-400">R2 score of 99.8%</strong>.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Created a machine learning pipeline that can create a 3D model from a given 2D photograph of a person using open-source tools and demonstrated it.</span>
+                        <span>Created a <strong className="text-blue-600 dark:text-blue-400">machine learning pipeline</strong> that can create a <strong className="text-blue-600 dark:text-blue-400">3D model</strong> from a given <strong className="text-blue-600 dark:text-blue-400">2D photograph</strong> of a person using <strong className="text-blue-600 dark:text-blue-400">open-source tools</strong> and demonstrated it.</span>
                       </li>
                     </ul>
                   </CardContent>
@@ -488,122 +544,219 @@ export default function Home() {
 
         {/* Projects Section */}
         <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-6xl w-full">
+          <div className="mx-auto max-w-7xl w-full">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <Code className="h-4 w-4" />
+              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-100 dark:to-slate-300 text-white dark:text-slate-900 px-6 py-3 rounded-full text-sm font-semibold mb-6 shadow-lg">
+                <Code className="h-5 w-5" />
                 Featured Projects
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+              <h2 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white mb-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-white dark:via-slate-100 dark:to-white bg-clip-text text-transparent">
                 What I&apos;ve Built
               </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                A showcase of my technical projects and innovative solutions
+              <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                Interactive demos and comprehensive showcases of my technical projects and innovative solutions
               </p>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2">
-              {/* Code Smart Chrome Extension */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 bg-slate-900 dark:bg-slate-100 rounded-lg">
-                      <Chrome className="h-6 w-6 text-white dark:text-slate-900" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                        Code Smart Chrome Extension
-                      </CardTitle>
-                      <CardDescription className="text-base text-slate-600 dark:text-slate-400">
-                        Jan 2024 - Dec 2025
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed">
-                    Developed an interactive Chrome extension for on-demand coding education (50+ active users) by integrating OpenAI&apos;s GPT and Google&apos;s Gemini APIs, reducing external search dependency by 90%. Led a team of 5 developers, optimizing PostgreSQL queries (+25% performance), designing scalable RESTful APIs, and building CI/CD pipelines. Implemented robust XPath solutions for dynamic web data extraction.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
-                      <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 cursor-pointer">Python</Badge>
-                    </motion.div>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Flask</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">OpenAI</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Gemini</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">DynamoDB</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">PostgreSQL</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">ReactJs</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Typescript</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">JavaScript</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Webpack</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Tailwind</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">NodeJS</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">AJAX</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">AWS</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Azure</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">BitBucket</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Jira</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Confluence</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Linux</Badge>
-                  </div>
-                  <Button className="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    View Project
-                  </Button>
-                </CardContent>
-              </Card>
-              </motion.div>
+            {/* Project Display */}
+            <div className="max-w-7xl mx-auto">
+              {(() => {
+                const project = projects[currentProject];
+                const IconComponent = project.icon;
+                return (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="group"
+                  >
+                    <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-slate-300 dark:group-hover:border-slate-600">
+                      {/* Project Header */}
+                      <CardHeader className="pb-4">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-3 bg-slate-900 dark:bg-slate-100 rounded-lg">
+                              <IconComponent className="h-6 w-6 text-white dark:text-slate-900" />
+                            </div>
+                            <div>
+                              <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
+                                {project.title}
+                              </CardTitle>
+                              <CardDescription className="text-base text-slate-600 dark:text-slate-400">
+                                {project.period}
+                              </CardDescription>
+                            </div>
+                          </div>
+                          <div className="flex gap-2">
+                            {project.chromeStoreUrl && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                                onClick={() => window.open(project.chromeStoreUrl, '_blank')}
+                              >
+                                <Chrome className="h-4 w-4 mr-1" />
+                                Chrome Store
+                              </Button>
+                            )}
+                            {project.githubUrl && (
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                                onClick={() => window.open(project.githubUrl, '_blank')}
+                              >
+                                <Github className="h-4 w-4 mr-1" />
+                                GitHub
+                              </Button>
+                            )}
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                              onClick={() => window.open(project.demoUrl, '_blank')}
+                            >
+                              <IconComponent className="h-4 w-4 mr-1" />
+                              Demo
+                            </Button>
+                          </div>
+                        </div>
+                      </CardHeader>
 
-              {/* Satellite Imagery Prediction */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-              >
-                <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 bg-slate-900 dark:bg-slate-100 rounded-lg">
-                      <Satellite className="h-6 w-6 text-white dark:text-slate-900" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                        Satellite Imagery Prediction
-                      </CardTitle>
-                      <CardDescription className="text-base text-slate-600 dark:text-slate-400">
-                        July 2020 - Dec 2020
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-slate-700 dark:text-slate-300 mb-6 leading-relaxed">
-                    Implemented an AI system to identify 2 particular structures from Large Satellite Images and in real-time. Analysed and explored many aspects of computer vision techniques and applied on collected dataset. Accelerated the prediction time for live identifications on google maps satellite image to 20 fps on GPU.
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Python</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Numpy</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Tensorflow</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Neural Networks</Badge>
-                    <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Object Detection</Badge>
-                  </div>
-                  <Button className="w-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200">
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    View Project
-                  </Button>
-                </CardContent>
-              </Card>
-              </motion.div>
+                      {/* Side-by-Side Layout */}
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-6 pb-6">
+                        {/* Left Side - Website Preview */}
+                        <div className="space-y-4">
+                          <h4 className="text-lg font-semibold text-slate-900 dark:text-white">Live Preview</h4>
+                          <div className="relative bg-slate-100 dark:bg-slate-700 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-600 group">
+                            <div className="absolute top-2 left-2 z-10 flex gap-1">
+                              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                            <div className="pt-8 pb-2 px-4 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-600">
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
+                                  <div className="w-4 h-4 bg-slate-200 dark:bg-slate-600 rounded"></div>
+                                  <span className="truncate">{project.websiteUrl}</span>
+                                </div>
+                                <div className="flex gap-1">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="h-6 w-6 p-0 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+                                    onClick={() => window.open(project.websiteUrl, '_blank')}
+                                  >
+                                    <ArrowRight className="h-3 w-3" />
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="relative flex justify-center p-4">
+                              <div className="relative">
+                                {/* Laptop frame */}
+                                <div className="bg-gray-800 rounded-t-lg p-1 shadow-lg">
+                                  <div className="bg-gray-900 rounded-sm overflow-hidden">
+                                    <iframe
+                                      src={project.websiteUrl}
+                                      className="w-[600px] h-[375px] bg-white dark:bg-slate-900"
+                                      title={`${project.title} Demo`}
+                                      loading="lazy"
+                                      sandbox="allow-scripts allow-same-origin"
+                                      style={{
+                                        width: '600px',
+                                        height: '375px',
+                                        transform: `scale(${project.iframeScale})`,
+                                        transformOrigin: 'top center'
+                                      }}
+                                    ></iframe>
+                                  </div>
+                                </div>
+                                {/* Laptop base */}
+                                <div className="bg-gray-800 h-2 rounded-b-lg shadow-lg"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Side - Project Details */}
+                        <div className="space-y-6">
+                          <div>
+                            <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">About This Project</h4>
+                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+                              {project.description}
+                            </p>
+                          </div>
+
+                          <div>
+                            <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Key Features</h4>
+                            <ul className="space-y-2 text-slate-700 dark:text-slate-300">
+                              {project.keyFeatures.map((feature, featureIndex) => (
+                                <li key={featureIndex} className="flex items-start gap-2">
+                                  <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                                  <span>{feature}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">Tech Stack</h4>
+                            <div className="flex flex-wrap gap-2">
+                              {project.techStack.map((tech, techIndex) => (
+                                <motion.div key={techIndex} whileHover={{ scale: 1.05 }} transition={{ duration: 0.2 }}>
+                                  <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 cursor-pointer">
+                                    {tech}
+                                  </Badge>
+                                </motion.div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <div className="text-sm text-slate-600 dark:text-slate-400">
+                              {project.stats.split(' • ').map((stat, statIndex) => (
+                                <span key={statIndex}>
+                                  {statIndex > 0 && ' • '}
+                                  <strong className="text-green-600 dark:text-green-400">{stat}</strong>
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </motion.div>
+                );
+              })()}
+
+              {/* Project Navigation */}
+              <div className="flex justify-center items-center gap-4 mt-8">
+                <Button
+                  variant="outline"
+                  onClick={prevProject}
+                  disabled={currentProject === 0}
+                  className="flex items-center gap-2"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Previous
+                </Button>
+
+                <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                  <span>{currentProject + 1} of {projects.length}</span>
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={nextProject}
+                  disabled={currentProject === projects.length - 1}
+                  className="flex items-center gap-2"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </section>

@@ -955,9 +955,18 @@ export default function Home() {
                   <p className="text-slate-700 dark:text-slate-300 font-medium mb-2">
                     &ldquo;A regularization factor-based approach to anomaly detection using Contrastive Learning&rdquo;
                   </p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">
                     AJSE Journal, Springer (Impact Factor: 2.807)
                   </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    onClick={() => window.open('https://link.springer.com/article/10.1007/s13369-023-07959-7', '_blank')}
+                  >
+                    <FileText className="h-4 w-4 mr-1" />
+                    Read Paper
+                  </Button>
                 </CardContent>
               </Card>
 

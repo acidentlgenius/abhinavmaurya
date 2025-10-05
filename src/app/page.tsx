@@ -64,6 +64,28 @@ export default function Home() {
 
   const projects = [
     {
+      id: 'live-health-plus',
+      icon: Target,
+      title: 'Live Health Plus',
+      period: 'Jan 2024 - Oct 2025',
+      demoUrl: 'https://live-health-plus-frontend.vercel.app/',
+      websiteUrl: 'https://live-health-plus-frontend.vercel.app/',
+      githubUrl: undefined,
+      description: 'An intelligent health platform aggregating global disease outbreak signals from multi-source data (CDC, ECDC, Africa CDC, Google News), extracting structured insights with Gemini 2.5 Pro, and serving interactive maps, charts, and analytics via a FastAPI backend for real-time population health monitoring.',
+      keyFeatures: [
+        'Re-architected Celery/Redis pipeline to a lean APScheduler-driven ingestion service, reducing operational complexity by 70%, eliminating 5+ dependencies, and cutting peak memory from ~1GB+ to ~150MB on 10k+ articles while boosting ETL throughput by 3x.',
+        'Implemented LLM-powered outbreak extraction with Gemini 2.5 Pro function-calling schemas, strict validation, and Milvus vector enrichment for canonical disease metadata, achieving 94% extraction accuracy and reducing false positives from historical/irrelevant content by 65%.',
+        'Designed normalized PostgreSQL data model (Disease, Location, News, OutbreakRecord, GlobalPopulationHealthIndex) with SQLModel for idempotent storage, duplicate detection, and flexible multi-tag filtering across 250+ diseases and 10K+ locations.',
+        'Built robust content retrieval with Selenium, proxy rotation, and exponential backoff to handle 403/429 errors, boosting successful fetch rates by 40% and processing 1M+ articles with 99.8% uptime over 18 months.',
+        'Developed FastAPI endpoints for maps (GeoJSON features), time-series charts, top-K outbreaks/symptoms, and paginated datasets, with thread-safe in-memory caching (TTL 30min) cutting DB load by 60%, p95 latency to <200ms, and supporting 1k+ concurrent queries without degradation.',
+        'Automated multi-source scheduling (Google News every 6h, CDC/ECDC weekly) with audit logging, retries, and resume-from-state for resilient ETL in high-variance networks, enabling 100% data freshness within 6-hour windows and zero production data loss incidents.',
+        'Deployed on Google Cloud App Engine with Cloud Build CI/CD and Secret Manager, enabling secure, cost-efficient scaling without Redis dependencies—reduced monthly infra costs by 45% while handling 10k+ API requests/month across 500+ unique users.'
+      ],
+      techStack: ['Python 3', 'FastAPI', 'APScheduler', 'SQLModel', 'PostgreSQL', 'Gemini 2.5 Pro', 'Milvus (Zilliz)', 'Selenium', 'Pandas', 'Google Cloud App Engine'],
+      stats: 'Solo project • Processed 50k+ articles, served 10k+ API requests/month, covered 200+ countries and 50+ diseases',
+      iframeScale: 1
+    },
+    {
       id: 'code-smart',
       icon: Chrome,
       title: 'Code Smart Chrome Extension',
@@ -84,24 +106,6 @@ export default function Home() {
       techStack: ['React', 'TypeScript', 'TailwindCSS', 'PostgreSQL', 'GPT-4', 'Gemini API', 'Firebase Auth', 'Chrome Extension'],
       stats: 'Team of 5 • 100+ user logins, 50+ Chrome extension users',
       iframeScale: 1
-    },
-    {
-      id: 'satellite-imagery',
-      icon: Satellite,
-      title: 'Satellite Imagery Prediction',
-      period: 'July 2020 - Dec 2020',
-      githubUrl: 'https://github.com/abhinavmaurya/satellite-imagery-ai',
-      demoUrl: 'https://satellite-imagery-demo.vercel.app',
-      websiteUrl: 'https://satellite-imagery-demo.vercel.app',
-      description: 'An AI-powered system for real-time identification of specific structures from large satellite images, utilizing advanced computer vision techniques.',
-      keyFeatures: [
-        'Implemented AI system to identify 2 particular structures from Large Satellite Images in real-time.',
-        'Analysed and explored various aspects of computer vision techniques and applied them on collected dataset.',
-        'Accelerated prediction time for live identifications on Google Maps satellite images to 20 fps on GPU.'
-      ],
-      techStack: ['Python', 'Numpy', 'Tensorflow', 'Neural Networks', 'Object Detection'],
-      stats: 'Real-time processing • 20 fps on GPU • Advanced computer vision',
-      iframeScale: 0.6
     }
   ];
 
@@ -964,7 +968,7 @@ export default function Home() {
                     <Code className="h-6 w-6 text-white dark:text-slate-900" />
                   </div>
                   <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">
-                    Competitive Programming
+                    Data Structures & Algorithms
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-center">

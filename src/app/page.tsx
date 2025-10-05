@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Mail, Phone, Linkedin, Sun, Moon, MapPin, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, Satellite, FileText, Target, Zap, Star, ChevronDown, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -114,7 +115,7 @@ export default function Home() {
       id: 'live-health-plus',
       icon: Target,
       title: 'Live Health Plus',
-      period: 'Jan 2024 - Oct 2025',
+      period: 'Jan 2024 - Present',
       demoUrl: 'https://live-health-plus-frontend.vercel.app/',
       websiteUrl: 'https://live-health-plus-frontend.vercel.app/',
       githubUrl: undefined,
@@ -303,10 +304,15 @@ export default function Home() {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               >
-                <Avatar className="h-32 w-32 mx-auto ring-4 ring-slate-200 dark:ring-slate-700">
-                  <AvatarImage src="/avatar.jpg" alt="Abhinav Maurya" />
-                  <AvatarFallback className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-2xl font-bold">AM</AvatarFallback>
-                </Avatar>
+                <div className="relative h-48 w-48 mx-auto ring-4 ring-slate-200 dark:ring-slate-700 rounded-full overflow-hidden">
+                  <Image
+                    src="/portfolio_image.jpeg"
+                    alt="Abhinav Maurya"
+                    fill
+                    objectFit="cover"
+                    className="rounded-full"
+                  />
+                </div>
               </motion.div>
 
               {/* Name and Title */}

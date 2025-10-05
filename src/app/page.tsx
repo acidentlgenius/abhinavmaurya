@@ -17,6 +17,13 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('hero');
   const [currentProject, setCurrentProject] = useState(0);
 
+  // Preview sizing: render iframe at a desktop viewport but scale down to keep on-screen size unchanged
+  const PREVIEW_CONTAINER_WIDTH = 600; // visible width (kept same as current UI)
+  const PREVIEW_DESKTOP_WIDTH = 1280; // desktop viewport width to trigger desktop breakpoints
+  const PREVIEW_DESKTOP_HEIGHT = 800; // desktop viewport height
+  const PREVIEW_SCALE = PREVIEW_CONTAINER_WIDTH / PREVIEW_DESKTOP_WIDTH; // scale iframe to fit container
+  const PREVIEW_CONTAINER_HEIGHT = PREVIEW_DESKTOP_HEIGHT * PREVIEW_SCALE; // should be 375 for 1280x800 -> 600x375
+
   // Rising Sun Animation Component
   const RisingSun = () => {
     return (
@@ -809,18 +816,23 @@ export default function Home() {
                               <div className="relative">
                                 {/* Laptop frame */}
                                 <div className="bg-gray-800 rounded-t-lg p-1 shadow-lg">
-                                  <div className="bg-gray-900 rounded-sm overflow-hidden">
+                                  <div
+                                    className="bg-gray-900 rounded-sm overflow-hidden"
+                                    style={{ width: `${PREVIEW_CONTAINER_WIDTH}px`, height: `${PREVIEW_CONTAINER_HEIGHT}px` }}
+                                  >
                                     <iframe
                                       src={project.websiteUrl}
-                                      className="w-[600px] h-[375px] bg-white dark:bg-slate-900"
+                                      className="bg-white dark:bg-slate-900"
                                       title={`${project.title} Demo`}
                                       loading="lazy"
                                       sandbox="allow-scripts allow-same-origin"
                                       style={{
-                                        width: '600px',
-                                        height: '375px',
-                                        transform: `scale(${project.iframeScale})`,
-                                        transformOrigin: 'top center'
+                                        width: `${PREVIEW_DESKTOP_WIDTH}px`,
+                                        height: `${PREVIEW_DESKTOP_HEIGHT}px`,
+                                        transform: `scale(${PREVIEW_SCALE})`,
+                                        transformOrigin: 'top left',
+                                        border: '0',
+                                        display: 'block'
                                       }}
                                     ></iframe>
                                   </div>

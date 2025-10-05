@@ -62,6 +62,53 @@ export default function Home() {
     }
   };
 
+  // Function to highlight metrics and keywords in text
+  const highlightText = (text: string) => {
+    // Define important keywords to highlight
+    const keywords = [
+      'LLM-powered', 'PostgreSQL', 'FastAPI', 'Gemini 2.5 Pro', 'Milvus', 'Google Cloud', 'Redis', 'APScheduler',
+      'SQLModel', 'Selenium', 'Pandas', 'GeoJSON', 'TTL', 'CI/CD', 'Docker', 'Kubernetes', 'AWS', 'Azure',
+      'GPT-4', 'Firebase', 'Razorpay', 'TypeScript', 'TailwindCSS', 'React', 'Node.js', 'Python', 'Java',
+      'Machine Learning', 'AI', 'Deep Learning', 'Neural Networks', 'Computer Vision', 'NLP', 'API',
+      'LLM', 'vector database', 'SQL', 'Redshift', 'real-time rendering', 'agentic flow', 'real-time streaming',
+      'heartbeat mechanism', 'Ceph', 'OpenStack', 'Nagios', 'DB Compute', 'DNS Provisioning', 'RESTful APIs',
+      'multithreading', 'cloud orchestration', 'REST APIs', 'CLI', 'OSM', 'MongoDB', '4g/5g node deployment',
+      'Flask', 'gradient boosting', 'R2 score', 'machine learning pipeline', '3D model', '2D photograph',
+      'open-source tools', 'Baadal', 'BSNL'
+    ];
+
+    // Regex patterns for metrics
+    const metricPatterns = [
+      // Percentages: 70%, 94%, etc.
+      /\b(\d+(?:\.\d+)?)%/g,
+      // Numbers with units: 1GB, 150MB, 10k+, 3x, 1k+, etc.
+      /\b(\d+(?:\.\d+)?)(GB|MB|KB|TB|ms|min|h|hr|hours?|days?|weeks?|months?|years?|x|\+|k\+|M\+)/gi,
+      // Time formats: <200ms, 30min, 6h, etc.
+      /(<|>|=)?(\d+(?:\.\d+)?)(ms|min|h|hr|hours?|days?|weeks?|months?|years?)/gi,
+      // Large numbers: 10k+, 1M+, 500+, etc.
+      /\b(\d+)(k\+|M\+|\+)/g
+    ];
+
+    let highlightedText = text;
+
+    // First, highlight metrics with a specific class
+    metricPatterns.forEach(pattern => {
+      highlightedText = highlightedText.replace(pattern, (match) => {
+        return `<span class="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-1 py-0.5 rounded font-semibold">${match}</span>`;
+      });
+    });
+
+    // Then highlight keywords
+    keywords.forEach(keyword => {
+      const regex = new RegExp(`\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+      highlightedText = highlightedText.replace(regex, (match) => {
+        return `<span class="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 px-1 py-0.5 rounded font-medium">${match}</span>`;
+      });
+    });
+
+    return highlightedText;
+  };
+
   const projects = [
     {
       id: 'live-health-plus',
@@ -425,23 +472,23 @@ export default function Home() {
                       <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Implemented <strong className="text-blue-600 dark:text-blue-400">real-time streaming</strong> with a robust <strong className="text-blue-600 dark:text-blue-400">heartbeat mechanism</strong> to ensure seamless, uninterrupted performance for extended <strong className="text-blue-600 dark:text-blue-400">LLM</strong> interactions, enhancing user experience and system reliability.</span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented real-time streaming with a robust heartbeat mechanism to ensure seamless, uninterrupted performance for extended LLM interactions, enhancing user experience and system reliability.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Architected and deployed a vehicle recommendation engine by integrating research-phase algorithms into production databases, seamlessly embedding it into the core <strong className="text-blue-600 dark:text-blue-400">LLM</strong> chat application to deliver personalized, data-driven suggestions.</span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Architected and deployed a vehicle recommendation engine by integrating research-phase algorithms into production databases, seamlessly embedding it into the core LLM chat application to deliver personalized, data-driven suggestions.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Developed a file upload feature for chat interactions, leveraging <strong className="text-blue-600 dark:text-blue-400">vector database</strong> chunking and ranking-based context generation to provide precise, context-aware responses to user queries, boosting engagement and utility.</span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Developed a file upload feature for chat interactions, leveraging vector database chunking and ranking-based context generation to provide precise, context-aware responses to user queries, boosting engagement and utility.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Engineered an advanced <strong className="text-blue-600 dark:text-blue-400">agentic flow</strong> that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.</span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Engineered an advanced agentic flow that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>Enhanced chatbot capabilities by implementing prompt-driven data visualization. Automatically analyzed user prompts to identify visualization needs, generated <strong className="text-blue-600 dark:text-blue-400">SQL</strong> queries to fetch relevant data from <strong className="text-blue-600 dark:text-blue-400">Redshift</strong>, and streamed graph data to the frontend for <strong className="text-blue-600 dark:text-blue-400">real-time rendering</strong>, enriching user insights.</span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Enhanced chatbot capabilities by implementing prompt-driven data visualization. Automatically analyzed user prompts to identify visualization needs, generated SQL queries to fetch relevant data from Redshift, and streamed graph data to the frontend for real-time rendering, enriching user insights.') }}></span>
                         </li>
                       </ul>
                     </CardContent>
@@ -480,19 +527,19 @@ export default function Home() {
                     <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Contributed to <strong className="text-purple-600 dark:text-purple-400">Baadal</strong>&apos;s cloud infrastructure by developing key modules (<strong className="text-blue-600 dark:text-blue-400">Ceph</strong>, <strong className="text-blue-600 dark:text-blue-400">OpenStack</strong>, <strong className="text-blue-600 dark:text-blue-400">Nagios</strong>, <strong className="text-blue-600 dark:text-blue-400">DB Compute</strong>, <strong className="text-blue-600 dark:text-blue-400">DNS Provisioning</strong>) that boosted scalability by <strong className="text-green-600 dark:text-green-400">30%</strong> and supported <strong className="text-green-600 dark:text-green-400">10,000+ virtual instances</strong>; collaborated with stakeholders to align solutions with organizational needs.</span>
+                        <span dangerouslySetInnerHTML={{ __html: highlightText('Contributed to Baadal\'s cloud infrastructure by developing key modules (Ceph, OpenStack, Nagios, DB Compute, DNS Provisioning) that boosted scalability by 30% and supported 10K+ virtual instances; collaborated with stakeholders to align solutions with organizational needs.') }}></span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Enhanced these modules by designing robust <strong className="text-blue-600 dark:text-blue-400">RESTful APIs</strong>, intuitive UIs, and integrating <strong className="text-blue-600 dark:text-blue-400">multithreading</strong> techniques to improve user experience and system performance under high-load conditions.</span>
+                        <span dangerouslySetInnerHTML={{ __html: highlightText('Enhanced these modules by designing robust RESTful APIs, intuitive UIs, and integrating multithreading techniques to improve user experience and system performance under high-load conditions.') }}></span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Engineered <strong className="text-blue-600 dark:text-blue-400">cloud orchestration</strong> features, <strong className="text-blue-600 dark:text-blue-400">REST APIs</strong>, and <strong className="text-blue-600 dark:text-blue-400">CLI</strong> commands using <strong className="text-blue-600 dark:text-blue-400">Python</strong>, <strong className="text-blue-600 dark:text-blue-400">Docker</strong>, <strong className="text-blue-600 dark:text-blue-400">Kubernetes</strong>, <strong className="text-blue-600 dark:text-blue-400">OSM</strong>, <strong className="text-blue-600 dark:text-blue-400">MongoDB</strong>, and <strong className="text-blue-600 dark:text-blue-400">SQL</strong>, automating virtual machine management, boosting system reliability by <strong className="text-green-600 dark:text-green-400">25%</strong> and reducing manual intervention time by <strong className="text-green-600 dark:text-green-400">40%</strong> across a unified portal.</span>
+                        <span dangerouslySetInnerHTML={{ __html: highlightText('Engineered cloud orchestration features, REST APIs, and CLI commands using Python, Docker, Kubernetes, OSM, MongoDB, and SQL, automating virtual machine management, boosting system reliability by 25% and reducing manual intervention time by 40% across a unified portal.') }}></span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Led and designed the implementation of a tool to automate the <strong className="text-blue-600 dark:text-blue-400">4g/5g node deployment</strong> process for <strong className="text-purple-600 dark:text-purple-400">BSNL</strong>, reducing deployment time from <strong className="text-green-600 dark:text-green-400">2 hours to just 20 minutes</strong> using <strong className="text-blue-600 dark:text-blue-400">Python</strong>, <strong className="text-blue-600 dark:text-blue-400">Flask</strong>, Frontend and Backend technologies. Tooling improved the speed and accuracy of deployment, saving the company time and resources.</span>
+                        <span dangerouslySetInnerHTML={{ __html: highlightText('Led and designed the implementation of a tool to automate the 4g/5g node deployment process for BSNL, reducing deployment time from 2 hours to just 20 minutes using Python, Flask, Frontend and Backend technologies. Tooling improved the speed and accuracy of deployment, saving the company time and resources.') }}></span>
                       </li>
                     </ul>
                   </CardContent>
@@ -531,11 +578,11 @@ export default function Home() {
                     <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Build a dashboard for visualization of a data analytic project which boosted the process by <strong className="text-green-600 dark:text-green-400">60%</strong>. Also, trained model using <strong className="text-blue-600 dark:text-blue-400">gradient boosting</strong> and added a module for prediction with an <strong className="text-green-600 dark:text-green-400">R2 score of 99.8%</strong>.</span>
+                        <span dangerouslySetInnerHTML={{ __html: highlightText('Build a dashboard for visualization of a data analytic project which boosted the process by 60%. Also, trained model using gradient boosting and added a module for prediction with an R2 score of 99.8%.') }}></span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Created a <strong className="text-blue-600 dark:text-blue-400">machine learning pipeline</strong> that can create a <strong className="text-blue-600 dark:text-blue-400">3D model</strong> from a given <strong className="text-blue-600 dark:text-blue-400">2D photograph</strong> of a person using <strong className="text-blue-600 dark:text-blue-400">open-source tools</strong> and demonstrated it.</span>
+                        <span dangerouslySetInnerHTML={{ __html: highlightText('Created a machine learning pipeline that can create a 3D model from a given 2D photograph of a person using open-source tools and demonstrated it.') }}></span>
                       </li>
                     </ul>
                   </CardContent>
@@ -688,9 +735,7 @@ export default function Home() {
                         <div className="space-y-6">
                           <div>
                             <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">About This Project</h4>
-                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                              {project.description}
-                            </p>
+                            <p className="text-slate-700 dark:text-slate-300 leading-relaxed" dangerouslySetInnerHTML={{ __html: highlightText(project.description) }}></p>
                           </div>
 
                           <div>
@@ -699,7 +744,7 @@ export default function Home() {
                               {project.keyFeatures.map((feature, featureIndex) => (
                                 <li key={featureIndex} className="flex items-start gap-2">
                                   <div className="w-1.5 h-1.5 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                                  <span>{feature}</span>
+                                  <span dangerouslySetInnerHTML={{ __html: highlightText(feature) }}></span>
                                 </li>
                               ))}
                             </ul>
@@ -723,7 +768,7 @@ export default function Home() {
                               {project.stats.split(' • ').map((stat, statIndex) => (
                                 <span key={statIndex}>
                                   {statIndex > 0 && ' • '}
-                                  <strong className="text-green-600 dark:text-green-400">{stat}</strong>
+                                  <span dangerouslySetInnerHTML={{ __html: highlightText(stat) }}></span>
                                 </span>
                               ))}
                             </div>

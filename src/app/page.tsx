@@ -46,7 +46,7 @@ export default function Home() {
             delay: 0.5
           }}
         />
-        
+
         {/* Glowing Particles */}
         {[...Array(20)].map((_, i) => (
           <motion.div
@@ -57,7 +57,7 @@ export default function Home() {
               top: `${40 + Math.random() * 30}%`,
             }}
             initial={{ scale: 0, y: 50, opacity: 0 }}
-            animate={{ 
+            animate={{
               scale: [0, 1, 0],
               y: [-50, -100, -150],
               opacity: [0, 0.8, 0],
@@ -72,12 +72,12 @@ export default function Home() {
             }}
           />
         ))}
-        
+
         {/* Gradient Background */}
         <motion.div
           className="absolute inset-0"
           style={{
-            background: darkMode 
+            background: darkMode
               ? 'radial-gradient(ellipse at right bottom, rgba(251, 191, 36, 0.1) 0%, rgba(15, 23, 42, 0.8) 70%)'
               : 'radial-gradient(ellipse at right bottom, rgba(251, 191, 36, 0.15) 0%, rgba(248, 250, 252, 0.9) 70%)'
           }}
@@ -147,7 +147,8 @@ export default function Home() {
       'heartbeat mechanism', 'Ceph', 'OpenStack', 'Nagios', 'DB Compute', 'DNS Provisioning', 'RESTful APIs',
       'multithreading', 'cloud orchestration', 'REST APIs', 'CLI', 'OSM', 'MongoDB', '4g/5g node deployment',
       'Flask', 'gradient boosting', 'R2 score', 'machine learning pipeline', '3D model', '2D photograph',
-      'open-source tools', 'Baadal', 'BSNL'
+      'open-source tools', 'Baadal', 'BSNL', 'scikit-learn', 'RAG', 'Retrieval-Augmented Generation',
+      'langchain', 'langgraph', 'C-DOT', 'XGBoost', 'Isolation Forest', 'Prometheus', 'Grafana', 'AWS Bedrock'
     ];
 
     // Regex patterns for metrics
@@ -243,7 +244,7 @@ export default function Home() {
 
   return (
     <TooltipProvider>
-      <motion.div 
+      <motion.div
         className="min-h-screen bg-white dark:bg-slate-950 font-sans"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -278,11 +279,10 @@ export default function Home() {
                       transition={{ duration: 0.2 }}
                     >
                       <NavigationMenuLink
-                        className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
-                          activeSection === item.id
+                        className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeSection === item.id
                             ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                             : 'hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300'
-                        }`}
+                          }`}
                         onClick={() => scrollToSection(item.id)}
                       >
                         {item.label}
@@ -348,11 +348,10 @@ export default function Home() {
                         key={item.id}
                         variant={activeSection === item.id ? "default" : "ghost"}
                         onClick={() => scrollToSection(item.id)}
-                        className={`justify-start ${
-                          activeSection === item.id
+                        className={`justify-start ${activeSection === item.id
                             ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
                             : ''
-                        }`}
+                          }`}
                       >
                         {item.label}
                       </Button>
@@ -368,17 +367,17 @@ export default function Home() {
         <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
           {/* Rising Sun Background Animation */}
           <RisingSun />
-          
+
           <div className="relative mx-auto max-w-4xl w-full text-center z-10">
             <div className="space-y-8">
               {/* Avatar */}
-              <motion.div 
+              <motion.div
                 className="inline-block"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
               >
-                <motion.div 
+                <motion.div
                   className="relative h-48 w-48 mx-auto rounded-full overflow-hidden"
                   animate={{
                     boxShadow: [
@@ -408,7 +407,7 @@ export default function Home() {
               </motion.div>
 
               {/* Name and Title */}
-              <motion.div 
+              <motion.div
                 className="space-y-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -417,7 +416,7 @@ export default function Home() {
                 <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight">
                   Abhinav Maurya
                 </h1>
-                <motion.p 
+                <motion.p
                   className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium"
                   animate={{
                     color: ['#64748b', '#f59e0b', '#64748b']
@@ -437,7 +436,7 @@ export default function Home() {
               </motion.div>
 
               {/* Contact Info */}
-              <motion.div 
+              <motion.div
                 className="flex flex-wrap justify-center gap-4 text-sm"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -476,7 +475,7 @@ export default function Home() {
               </motion.div>
 
               {/* Action Buttons */}
-              <motion.div 
+              <motion.div
                 className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -515,7 +514,7 @@ export default function Home() {
               </motion.div>
 
               {/* Scroll Indicator */}
-              <motion.div 
+              <motion.div
                 className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -580,19 +579,19 @@ export default function Home() {
                       <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented real-time streaming with a robust heartbeat mechanism to ensure seamless, uninterrupted performance for extended LLM interactions, enhancing user experience and system reliability.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented real-time streaming with a robust heartbeat mechanism to ensure seamless, uninterrupted performance for extended LLM interactions on AWS Bedrock, enhancing user experience and system reliability.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Architected and deployed a vehicle recommendation engine by integrating research-phase algorithms into production databases, seamlessly embedding it into the core LLM chat application to deliver personalized, data-driven suggestions.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Architected and deployed a vehicle recommendation engine based on scikit-learn clustering algorithms using Docker and Kubernetes, integrating research-phase algorithms into the production data warehouse (Redshift) and implementing GitHub CI/CD pipelines to automate deployment, seamlessly embedding it into the core LLM chat application for personalized, data-driven suggestions.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Developed a file upload feature for chat interactions, leveraging vector database chunking and ranking-based context generation to provide precise, context-aware responses to user queries, boosting engagement and utility.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Developed a file upload feature for chat interactions supporting unstructured data, leveraging RAG (Retrieval-Augmented Generation) with vector database chunking and ranking-based context generation to deliver precise, context-aware responses, significantly boosting engagement and utility.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Engineered an advanced agentic flow that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Engineered an advanced agentic flow using langchain and langgraph that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -613,45 +612,49 @@ export default function Home() {
                   className="relative md:ml-16"
                 >
                   <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300">
-                  <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
-                    <Code className="h-4 w-4 text-white dark:text-slate-900" />
-                  </div>
-                  <CardHeader className="pb-4">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div>
-                        <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                          Full Stack Developer
-                        </CardTitle>
-                        <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
-                          Tata Consultancy Services
-                        </CardDescription>
-                      </div>
-                      <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
-                        Jul 2022 - Mar 2025
-                      </Badge>
+                    <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
+                      <Code className="h-4 w-4 text-white dark:text-slate-900" />
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3 text-slate-700 dark:text-slate-300">
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span dangerouslySetInnerHTML={{ __html: highlightText('Contributed to Baadal\'s cloud infrastructure by developing key modules (Ceph, OpenStack, Nagios, DB Compute, DNS Provisioning) that boosted scalability by 30% and supported 10K+ virtual instances; collaborated with stakeholders to align solutions with organizational needs.') }}></span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span dangerouslySetInnerHTML={{ __html: highlightText('Enhanced these modules by designing robust RESTful APIs, intuitive UIs, and integrating multithreading techniques to improve user experience and system performance under high-load conditions.') }}></span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span dangerouslySetInnerHTML={{ __html: highlightText('Engineered cloud orchestration features, REST APIs, and CLI commands using Python, Docker, Kubernetes, OSM, MongoDB, and SQL, automating virtual machine management, boosting system reliability by 25% and reducing manual intervention time by 40% across a unified portal.') }}></span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span dangerouslySetInnerHTML={{ __html: highlightText('Led and designed the implementation of a tool to automate the 4g/5g node deployment process for BSNL, reducing deployment time from 2 hours to just 20 minutes using Python, Flask, Frontend and Backend technologies. Tooling improved the speed and accuracy of deployment, saving the company time and resources.') }}></span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
+                    <CardHeader className="pb-4">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                          <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
+                            Full Stack Developer
+                          </CardTitle>
+                          <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
+                            Tata Consultancy Services
+                          </CardDescription>
+                        </div>
+                        <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
+                          Jul 2022 - Mar 2025
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3 text-slate-700 dark:text-slate-300">
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Designed, implemented and maintained ML-based automation for resource prediction and anomaly detection within Baadal using Python, Flask, and scikit-learn; reduced downtime events by 22% through proactive system alerts integrated with Prometheus and Grafana.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Contributed to Baadal’s internal cloud infrastructure by building scalable modules (Ceph, OpenStack, Nagios, DB Compute, DNS Provisioning) that enhanced orchestration efficiency by 30% and supported over 10,000+ virtual instances across multiple tenants.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Enhanced these modules by designing robust RESTful APIs, intuitive UIs, and integrating multithreading techniques to improve user experience and system performance under high-load conditions.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Led the development of an ML-driven automation tool for 4G/5G node deployment at BSNL using Python, Flask, and C-DOT scripts, cutting deployment time from 2 hours to 20 minutes. Integrated XGBoost and Isolation Forest models for resource prediction and anomaly detection, with Prometheus–Grafana monitoring to enhance reliability and performance.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented cloud orchestration APIs and CLI tools leveraging Python, OSM, and SQL to automate VM provisioning, optimizing resource utilization and reducing manual operations time by 40%.') }}></span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
                 </motion.div>
 
                 {/* ResoluteAI - ML Intern */}
@@ -664,37 +667,37 @@ export default function Home() {
                   className="relative md:ml-16"
                 >
                   <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300">
-                  <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
-                    <Target className="h-4 w-4 text-white dark:text-slate-900" />
-                  </div>
-                  <CardHeader className="pb-4">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                      <div>
-                        <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                          Machine Learning Engineer Intern
-                        </CardTitle>
-                        <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
-                          ResoluteAI.in
-                        </CardDescription>
-                      </div>
-                      <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
-                        Jul 2021 - Oct 2021
-                      </Badge>
+                    <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
+                      <Target className="h-4 w-4 text-white dark:text-slate-900" />
                     </div>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-3 text-slate-700 dark:text-slate-300">
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span dangerouslySetInnerHTML={{ __html: highlightText('Build a dashboard for visualization of a data analytic project which boosted the process by 60%. Also, trained model using gradient boosting and added a module for prediction with an R2 score of 99.8%.') }}></span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span dangerouslySetInnerHTML={{ __html: highlightText('Created a machine learning pipeline that can create a 3D model from a given 2D photograph of a person using open-source tools and demonstrated it.') }}></span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
+                    <CardHeader className="pb-4">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                          <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
+                            Machine Learning Engineer Intern
+                          </CardTitle>
+                          <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
+                            ResoluteAI.in
+                          </CardDescription>
+                        </div>
+                        <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
+                          Jul 2021 - Oct 2021
+                        </Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-3 text-slate-700 dark:text-slate-300">
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Build a dashboard for visualization of a data analytic project which boosted the process by 60%. Also, trained model using gradient boosting and added a module for prediction with an R2 score of 99.8%.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Created a machine learning pipeline that can create a 3D model from a given 2D photograph of a person using open-source tools and demonstrated it.') }}></span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               </div>
             </div>

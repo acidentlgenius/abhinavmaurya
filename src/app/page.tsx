@@ -24,70 +24,7 @@ export default function Home() {
   const PREVIEW_SCALE = PREVIEW_CONTAINER_WIDTH / PREVIEW_DESKTOP_WIDTH; // scale iframe to fit container
   const PREVIEW_CONTAINER_HEIGHT = PREVIEW_DESKTOP_HEIGHT * PREVIEW_SCALE; // should be 375 for 1280x800 -> 600x375
 
-  // Rising Sun Animation Component
-  const RisingSun = () => {
-    return (
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Sun */}
-        <motion.div
-          className="absolute w-64 h-64 rounded-full"
-          style={{
-            background: 'radial-gradient(circle, #fbbf24 0%, #f59e0b 30%, #d97706 60%, #ea580c 100%)',
-            filter: 'blur(1px)',
-            right: '5%',
-            transform: 'translateX(50%)',
-            boxShadow: '0 0 80px rgba(251, 191, 36, 0.8), 0 0 150px rgba(245, 158, 11, 0.6), 0 0 220px rgba(217, 119, 6, 0.4)'
-          }}
-          initial={{ y: '100vh', scale: 0.5, opacity: 0.7 }}
-          animate={{ y: '-20vh', scale: 1, opacity: 1 }}
-          transition={{
-            duration: 4,
-            ease: [0.25, 0.46, 0.45, 0.94],
-            delay: 0.5
-          }}
-        />
 
-        {/* Glowing Particles */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            className="absolute w-2 h-2 bg-yellow-300 rounded-full opacity-70"
-            style={{
-              right: `${10 + Math.random() * 30}%`,
-              top: `${40 + Math.random() * 30}%`,
-            }}
-            initial={{ scale: 0, y: 50, opacity: 0 }}
-            animate={{
-              scale: [0, 1, 0],
-              y: [-50, -100, -150],
-              opacity: [0, 0.8, 0],
-              x: [0, Math.random() * 100 - 50, Math.random() * 200 - 100]
-            }}
-            transition={{
-              duration: 6 + Math.random() * 4,
-              delay: Math.random() * 5,
-              ease: 'easeOut',
-              repeat: Infinity,
-              repeatDelay: Math.random() * 3
-            }}
-          />
-        ))}
-
-        {/* Gradient Background */}
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            background: darkMode
-              ? 'radial-gradient(ellipse at right bottom, rgba(251, 191, 36, 0.1) 0%, rgba(15, 23, 42, 0.8) 70%)'
-              : 'radial-gradient(ellipse at right bottom, rgba(251, 191, 36, 0.15) 0%, rgba(248, 250, 252, 0.9) 70%)'
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3, ease: 'easeInOut' }}
-        />
-      </div>
-    );
-  };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -280,8 +217,8 @@ export default function Home() {
                     >
                       <NavigationMenuLink
                         className={`group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${activeSection === item.id
-                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
-                            : 'hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300'
+                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                          : 'hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300'
                           }`}
                         onClick={() => scrollToSection(item.id)}
                       >
@@ -349,8 +286,8 @@ export default function Home() {
                         variant={activeSection === item.id ? "default" : "ghost"}
                         onClick={() => scrollToSection(item.id)}
                         className={`justify-start ${activeSection === item.id
-                            ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
-                            : ''
+                          ? 'bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white'
+                          : ''
                           }`}
                       >
                         {item.label}
@@ -365,47 +302,22 @@ export default function Home() {
 
         {/* Hero Section */}
         <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
-          {/* Rising Sun Background Animation */}
-          <RisingSun />
+
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/portfolio_image.jpg"
+              alt="Background"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              className="opacity-100"
+              priority
+            />
+            <div className="absolute inset-0 bg-slate-900/70 dark:bg-slate-950/80 backdrop-blur-[2px]"></div>
+          </div>
 
           <div className="relative mx-auto max-w-4xl w-full text-center z-10">
             <div className="space-y-8">
-              {/* Avatar */}
-              <motion.div
-                className="inline-block"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              >
-                <motion.div
-                  className="relative h-48 w-48 mx-auto rounded-full overflow-hidden"
-                  animate={{
-                    boxShadow: [
-                      '0 0 20px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.3)',
-                      '0 0 40px rgba(251, 191, 36, 0.8), 0 0 100px rgba(251, 191, 36, 0.5)',
-                      '0 0 20px rgba(251, 191, 36, 0.5), 0 0 60px rgba(251, 191, 36, 0.3)'
-                    ]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: 'easeInOut'
-                  }}
-                  style={{
-                    border: '4px solid',
-                    borderImage: 'linear-gradient(45deg, #fbbf24, #f59e0b, #d97706) 1'
-                  }}
-                >
-                  <Image
-                    src="/portfolio_image.jpeg"
-                    alt="Abhinav Maurya"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-full"
-                  />
-                </motion.div>
-              </motion.div>
-
               {/* Name and Title */}
               <motion.div
                 className="space-y-4"
@@ -413,13 +325,13 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
               >
-                <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white leading-tight">
+                <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
                   Abhinav Maurya
                 </h1>
                 <motion.p
-                  className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-medium"
+                  className="text-xl md:text-2xl text-slate-200 font-medium"
                   animate={{
-                    color: ['#64748b', '#f59e0b', '#64748b']
+                    color: ['#e2e8f0', '#fbbf24', '#e2e8f0']
                   }}
                   transition={{
                     duration: 4,
@@ -427,11 +339,10 @@ export default function Home() {
                     ease: 'easeInOut'
                   }}
                 >
-                  🚀 Machine Learning Engineer & Full Stack Developer
+                  GenAI / Machine Learning Engineer
                 </motion.p>
-                <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                  Passionate about building intelligent systems and scalable web applications.
-                  Experienced in machine learning, full-stack development, and cloud technologies.
+                <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                  GenAI / Machine Learning Engineer with 3.7+ years of experience building and operating LLM-powered systems in production. Strong background in Retrieval-Augmented Generation (RAG), agent-based architectures, and cloud-native deployment. Proven ability to optimize latency, cost, and reliability while delivering secure, scalable AI services.
                 </p>
               </motion.div>
 
@@ -447,9 +358,9 @@ export default function Home() {
                   transition={{ duration: 0.2 }}
                   className="cursor-pointer"
                 >
-                  <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                    <MapPin className="h-4 w-4 text-slate-500" />
-                    <span className="text-slate-700 dark:text-slate-300">Noida, Uttar Pradesh</span>
+                  <div className="flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg px-4 py-2 hover:bg-slate-800 transition-colors">
+                    <MapPin className="h-4 w-4 text-slate-400" />
+                    <span className="text-slate-200">Noida, Uttar Pradesh</span>
                   </div>
                 </motion.div>
                 <motion.div
@@ -457,9 +368,9 @@ export default function Home() {
                   transition={{ duration: 0.2 }}
                   className="cursor-pointer"
                 >
-                  <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                    <Phone className="h-4 w-4 text-slate-500" />
-                    <span className="text-slate-700 dark:text-slate-300">+91 8299142953</span>
+                  <div className="flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg px-4 py-2 hover:bg-slate-800 transition-colors">
+                    <Phone className="h-4 w-4 text-slate-400" />
+                    <span className="text-slate-200">+91 8299142953</span>
                   </div>
                 </motion.div>
                 <motion.div
@@ -467,9 +378,9 @@ export default function Home() {
                   transition={{ duration: 0.2 }}
                   className="cursor-pointer"
                 >
-                  <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
-                    <Mail className="h-4 w-4 text-slate-500" />
-                    <span className="text-slate-700 dark:text-slate-300">abhinavmaurya747@gmail.com</span>
+                  <div className="flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg px-4 py-2 hover:bg-slate-800 transition-colors">
+                    <Mail className="h-4 w-4 text-slate-400" />
+                    <span className="text-slate-200">abhinavmaurya747@gmail.com</span>
                   </div>
                 </motion.div>
               </motion.div>
@@ -488,7 +399,7 @@ export default function Home() {
                 >
                   <Button
                     size="lg"
-                    className="bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 shadow-sm"
+                    className="bg-white text-slate-900 hover:bg-slate-200 shadow-lg border-none"
                     onClick={() => scrollToSection('experience')}
                   >
                     <Briefcase className="mr-2 h-5 w-5" />
@@ -504,7 +415,7 @@ export default function Home() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
+                    className="bg-transparent border-white text-white hover:bg-white/10 hover:text-white"
                     onClick={() => window.open('https://linkedin.com/in/acidentlgenius', '_blank')}
                   >
                     <Linkedin className="mr-2 h-5 w-5" />
@@ -520,7 +431,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
               >
-                <ChevronDown className="h-6 w-6 text-slate-400 dark:text-slate-500 animate-bounce" />
+                <ChevronDown className="h-6 w-6 text-white/70 animate-bounce" />
               </motion.div>
             </div>
           </div>
@@ -547,7 +458,7 @@ export default function Home() {
               <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-slate-300 dark:bg-slate-700 hidden md:block"></div>
 
               <div className="space-y-8">
-                {/* Tata Consultancy Services - ML Engineer */}
+                {/* Tata Consultancy Services */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -564,14 +475,14 @@ export default function Home() {
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
                           <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                            Machine Learning Engineer
+                            Machine Learning Engineer | Full Stack Developer (ML)
                           </CardTitle>
                           <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
                             Tata Consultancy Services
                           </CardDescription>
                         </div>
                         <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
-                          Mar 2025 - Present
+                          Jul 2022 - Present
                         </Badge>
                       </div>
                     </CardHeader>
@@ -579,78 +490,51 @@ export default function Home() {
                       <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented real-time streaming with a robust heartbeat mechanism to ensure seamless, uninterrupted performance for extended LLM interactions on AWS Bedrock, enhancing user experience and system reliability.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Owned the design and production deployment of LLM-powered GenAI pipelines on AWS Bedrock, supporting 100K+ monthly requests with 99.9% uptime, TTFT-500ms p95 latency, and cost-efficient inference at enterprise scale.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Architected and deployed a vehicle recommendation engine based on scikit-learn clustering algorithms using Docker and Kubernetes, integrating research-phase algorithms into the production data warehouse (Redshift) and implementing GitHub CI/CD pipelines to automate deployment, seamlessly embedding it into the core LLM chat application for personalized, data-driven suggestions.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Built end-to-end Retrieval-Augmented Generation (RAG) systems using embeddings, semantic chunking, ranking strategies, and vector databases, improving answer grounding accuracy by 35% on internal evaluation datasets.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Developed a file upload feature for chat interactions supporting unstructured data, leveraging RAG (Retrieval-Augmented Generation) with vector database chunking and ranking-based context generation to deliver precise, context-aware responses, significantly boosting engagement and utility.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Architected multi-agent workflows using LangChain and LangGraph, enabling tool-augmented reasoning, memory management, and parallel task execution, reducing complex task completion time by 40%.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Engineered an advanced agentic flow using langchain and langgraph that decomposes complex user prompts into sub-prompts, processes them in parallel, and synthesizes results for a cohesive final response. Streamed intermediate thoughts, sub-prompt statuses, and results to the user, delivering a transparent and interactive experience.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Optimized LLM inference pipelines using batching, caching, prompt compression, and context-window management, reducing average inference cost by 45% while maintaining response quality.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Enhanced chatbot capabilities by implementing prompt-driven data visualization. Automatically analyzed user prompts to identify visualization needs, generated SQL queries to fetch relevant data from Redshift, and streamed graph data to the frontend for real-time rendering, enriching user insights.') }}></span>
-                        </li>
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-
-                {/* Tata Consultancy Services - Full Stack Developer */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="relative md:ml-16"
-                >
-                  <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-lg transition-all duration-300">
-                    <div className="absolute -left-4 top-8 w-8 h-8 bg-slate-900 dark:bg-slate-100 rounded-full hidden md:flex items-center justify-center">
-                      <Code className="h-4 w-4 text-white dark:text-slate-900" />
-                    </div>
-                    <CardHeader className="pb-4">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <div>
-                          <CardTitle className="text-2xl font-bold text-slate-900 dark:text-white">
-                            Full Stack Developer
-                          </CardTitle>
-                          <CardDescription className="text-lg text-slate-600 dark:text-slate-400 font-medium">
-                            Tata Consultancy Services
-                          </CardDescription>
-                        </div>
-                        <Badge variant="secondary" className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 w-fit">
-                          Jul 2022 - Mar 2025
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-3 text-slate-700 dark:text-slate-300">
-                        <li className="flex items-start gap-3">
-                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Designed, implemented and maintained ML-based automation for resource prediction and anomaly detection within Baadal using Python, Flask, and scikit-learn; reduced downtime events by 22% through proactive system alerts integrated with Prometheus and Grafana.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented prompt engineering and evaluation pipelines with A/B testing and offline benchmarks, improving task-level accuracy by 18% and reducing hallucination rates by 30%.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Contributed to Baadal’s internal cloud infrastructure by building scalable modules (Ceph, OpenStack, Nagios, DB Compute, DNS Provisioning) that enhanced orchestration efficiency by 30% and supported over 10,000+ virtual instances across multiple tenants.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Developed secure, scalable AI service APIs with streaming responses, rate limiting, and observability, handling 1K+ concurrent sessions while meeting enterprise security and compliance requirements.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Enhanced these modules by designing robust RESTful APIs, intuitive UIs, and integrating multithreading techniques to improve user experience and system performance under high-load conditions.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Containerized and deployed GenAI services using Docker and Kubernetes, integrating CI/CD, monitoring, retraining workflows, and drift detection, cutting release cycles from days to under 1 hour.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Led the development of an ML-driven automation tool for 4G/5G node deployment at BSNL using Python, Flask, and C-DOT scripts, cutting deployment time from 2 hours to 20 minutes. Integrated XGBoost and Isolation Forest models for resource prediction and anomaly detection, with Prometheus–Grafana monitoring to enhance reliability and performance.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Integrated prompt-driven analytics by dynamically generating SQL queries and streaming results from Redshift to the frontend, enabling real-time insights and reducing manual analysis effort by 60%.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented cloud orchestration APIs and CLI tools leveraging Python, OSM, and SQL to automate VM provisioning, optimizing resource utilization and reducing manual operations time by 40%.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Led ML-driven automation for 4G/5G node deployment using Python and Flask, reducing deployment time from 2 hours to 20 minutes and minimizing human intervention errors.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Designed anomaly detection and resource prediction pipelines using scikit-learn, XGBoost, and Isolation Forest, reducing downtime incidents by 22% through proactive alerts.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Built scalable cloud orchestration modules supporting 10,000+ virtual instances, improving provisioning efficiency by 30% across multi-tenant environments.') }}></span>
+                        </li>
+                        <li className="flex items-start gap-3">
+                          <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Implemented monitoring, alerting, and retraining workflows using Prometheus and Grafana, enabling early issue detection and improving system reliability SLAs by 25%.') }}></span>
                         </li>
                       </ul>
                     </CardContent>
@@ -689,11 +573,11 @@ export default function Home() {
                       <ul className="space-y-3 text-slate-700 dark:text-slate-300">
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Build a dashboard for visualization of a data analytic project which boosted the process by 60%. Also, trained model using gradient boosting and added a module for prediction with an R2 score of 99.8%.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Developed end-to-end ML pipelines for analytics and prediction using Gradient Boosting, achieving an R2 score of 99.8% and improving analysis efficiency by 60%.') }}></span>
                         </li>
                         <li className="flex items-start gap-3">
                           <div className="w-2 h-2 bg-slate-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span dangerouslySetInnerHTML={{ __html: highlightText('Created a machine learning pipeline that can create a 3D model from a given 2D photograph of a person using open-source tools and demonstrated it.') }}></span>
+                          <span dangerouslySetInnerHTML={{ __html: highlightText('Built a computer vision pipeline to generate 3D models from 2D images using open-source tools.') }}></span>
                         </li>
                       </ul>
                     </CardContent>
@@ -954,54 +838,103 @@ export default function Home() {
                 <CardContent>
                   <div className="flex flex-wrap gap-3">
                     <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Python</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">C++</Badge>
                     <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">JavaScript</Badge>
                     <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">TypeScript</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">HTML/CSS</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">RDBMS</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MongoDB</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SQL</Badge>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Technologies & Frameworks */}
+              {/* GenAI / LLMs */}
               <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <Zap className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-                    Technologies & Frameworks
+                    GenAI / LLMs
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-3">
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">OpenAI</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Git</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">ReactJS</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Flask</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Docker</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Kubernetes</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Machine Learning</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Transformers</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Hugging Face</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">LLM fine-tuning (LoRA, PEFT)</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Inference optimization</Badge>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Other Skills */}
+              {/* RAG & Agents */}
               <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <Target className="h-5 w-5 text-slate-600 dark:text-slate-400" />
-                    Core Competencies
+                    RAG & Agents
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-3">
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Data Structures & Algorithms</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Cloud Technologies</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Software Development Life Cycle</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Software Engineering</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Retrieval-Augmented Generation (RAG)</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Embeddings</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Vector Databases</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">LangChain</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">LangGraph</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Cloud & LLMOps */}
+              <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Target className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                    Cloud & LLMOps
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-3">
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">AWS Bedrock</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">SageMaker</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Azure AI Foundry</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Docker</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Kubernetes</Badge>
                     <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CI/CD</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Full-Stack Python Development</Badge>
-                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Microservices</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Model Monitoring</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Data & Infra */}
+              <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Code className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                    Data & Infra
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-3">
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">PostgreSQL</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MongoDB</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Redshift</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Prometheus</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Grafana</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Practices */}
+              <Card className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Trophy className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+                    Practices
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-3">
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Cost optimization</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Secure AI design</Badge>
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Scalable API development</Badge>
                   </div>
                 </CardContent>
               </Card>

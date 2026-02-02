@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Mail, Phone, Linkedin, Sun, Moon, MapPin, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, Satellite, FileText, Target, Zap, Star, ChevronDown, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Mail, Phone, Linkedin, Sun, Moon, MapPin, Briefcase, Code, GraduationCap, Trophy, Github, Chrome, FileText, Target, Zap, Star, ChevronDown, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -175,9 +175,7 @@ export default function Home() {
     setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
-  const goToProject = (index: number) => {
-    setCurrentProject(index);
-  };
+
 
   return (
     <TooltipProvider>
